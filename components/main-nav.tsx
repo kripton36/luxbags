@@ -1,8 +1,11 @@
 import Link from "next/link"
-import { ShoppingBag, Search, User } from "lucide-react"
-import CartSheet from "./cart-sheet" // Import the CartSheet component
+import { ShoppingBag, Search, User, LayoutDashboard } from "lucide-react" // Import LayoutDashboard
+import CartSheet from "./cart-sheet"
 
 export default function MainNav() {
+  // In a real app, you'd check if the user is logged in and is staff
+  const isLoggedInAsStaff = true // For demonstration, assume staff is logged in
+
   return (
     <header className="px-4 lg:px-8 h-16 flex items-center justify-between border-b border-gray-200 bg-white shadow-sm">
       <Link
@@ -54,6 +57,12 @@ export default function MainNav() {
             <Search className="h-5 w-5" />
             <span className="sr-only">Search</span>
           </Link>
+          {isLoggedInAsStaff && (
+            <Link href="/dashboard" className="text-charcoal hover:text-gold transition-colors" prefetch={false}>
+              <LayoutDashboard className="h-5 w-5" />
+              <span className="sr-only">Dashboard</span>
+            </Link>
+          )}
           <Link href="/sign-in" className="text-charcoal hover:text-gold transition-colors" prefetch={false}>
             <User className="h-5 w-5" />
             <span className="sr-only">Account</span>

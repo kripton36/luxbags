@@ -11,6 +11,7 @@ export type Product = {
   category: string
 }
 
+// Make products mutable for demonstration purposes
 export const products: Product[] = [
   {
     id: "1",
@@ -115,5 +116,12 @@ export const products: Product[] = [
     category: "Crossbody Bags",
   },
 ]
+
+export const addProduct = (newProduct: Omit<Product, "id">) => {
+  const id = (products.length + 1).toString() // Simple ID generation
+  const productWithId = { ...newProduct, id }
+  products.push(productWithId)
+  return productWithId
+}
 
 export const getProductById = (id: string) => products.find((product) => product.id === id)
